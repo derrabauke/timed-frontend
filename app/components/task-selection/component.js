@@ -1,9 +1,4 @@
-/**
- * @module timed
- * @submodule timed-components
- * @public
- */
-import { action, computed } from "@ember/object";
+import { action } from "@ember/object";
 import { later } from "@ember/runloop";
 import { inject as service } from "@ember/service";
 import Component from "@glimmer/component";
@@ -204,13 +199,6 @@ export default class TaskSelectionComponent extends Component {
    * @property {Array} customersAndRecentTasks
    * @public
    */
-  @computed(
-    // eslint-disable-next-line ember/use-brace-expansion
-    "archived",
-    "history",
-    "tracking.customers.last",
-    "tracking.recentTasks.last.value"
-  )
   get customersAndRecentTasks() {
     let ids = [];
 

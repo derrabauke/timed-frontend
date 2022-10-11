@@ -1,7 +1,6 @@
 import EmberObject from "@ember/object";
 import { click, render } from "@ember/test-helpers";
 import { setupRenderingTest } from "ember-qunit";
-import wait from "ember-test-helpers/wait";
 import hbs from "htmlbars-inline-precompile";
 import { module, test } from "qunit";
 import { startMirage } from "timed/initializers/ember-cli-mirage";
@@ -36,16 +35,16 @@ module("Integration | Component | task selection", function (hooks) {
 
   test("renders", async function (assert) {
     await render(hbs`
-      {{#task-selection as |t|}}
+      <TaskSelection as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-      {{/task-selection}}
+      </TaskSelection>
     `);
 
-    assert.dom(".customer-select [aria-disabled=true]").doesNotExist();
-    assert.dom(".project-select [aria-disabled=true]").exists();
-    assert.dom(".task-select [aria-disabled=true]").exists();
+    assert.dom(".customer-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".project-select[aria-disabled=true]").exists();
+    assert.dom(".task-select[aria-disabled=true]").exists();
   });
 
   test("can set initial customer", async function (assert) {
@@ -53,29 +52,27 @@ module("Integration | Component | task selection", function (hooks) {
     this.set("customer", CUSTOMER);
 
     await render(hbs`
-      {{#task-selection
-        initial    = (hash
+      <TaskSelection
+        @initial={{(hash
           customer = customer
-        )
-      as |t|}}
+        )}}
+      as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-      {{/task-selection}}
+      </TaskSelection>
     `);
 
-    return wait().then(() => {
-      assert.dom(".customer-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".project-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".task-select [aria-disabled=true]").exists();
+    assert.dom(".customer-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".project-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".task-select[aria-disabled=true]").exists();
 
-      assert.equal(
-        this.element
-          .querySelector(".customer-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        CUSTOMER.name
-      );
-    });
+    assert.strictEqual(
+      this.element
+        .querySelector(".customer-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      CUSTOMER.name
+    );
   });
 
   test("can set initial project", async function (assert) {
@@ -83,35 +80,33 @@ module("Integration | Component | task selection", function (hooks) {
     this.set("project", PROJECT);
 
     await render(hbs`
-      {{#task-selection
-        initial   = (hash
+      <TaskSelection
+        @initial={{(hash
           project = project
-        )
-      as |t|}}
+        )}}
+      as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-      {{/task-selection}}
+      </TaskSelection>
     `);
 
-    return wait().then(() => {
-      assert.dom(".customer-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".project-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".task-select [aria-disabled=true]").doesNotExist();
+    assert.dom(".customer-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".project-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".task-select[aria-disabled=true]").doesNotExist();
 
-      assert.equal(
-        this.element
-          .querySelector(".customer-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        CUSTOMER.name
-      );
-      assert.equal(
-        this.element
-          .querySelector(".project-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        PROJECT.name
-      );
-    });
+    assert.strictEqual(
+      this.element
+        .querySelector(".customer-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      CUSTOMER.name
+    );
+    assert.strictEqual(
+      this.element
+        .querySelector(".project-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      PROJECT.name
+    );
   });
 
   test("can set initial task", async function (assert) {
@@ -119,41 +114,39 @@ module("Integration | Component | task selection", function (hooks) {
     this.set("task", TASK);
 
     await render(hbs`
-      {{#task-selection
-        initial = (hash
+      <TaskSelection
+        @initial={{(hash
           task  = task
-        )
-      as |t|}}
+        )}}
+      as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-      {{/task-selection}}
+      </TaskSelection>
     `);
 
-    return wait().then(() => {
-      assert.dom(".customer-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".project-select [aria-disabled=true]").doesNotExist();
-      assert.dom(".task-select [aria-disabled=true]").doesNotExist();
+    assert.dom(".customer-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".project-select[aria-disabled=true]").doesNotExist();
+    assert.dom(".task-select[aria-disabled=true]").doesNotExist();
 
-      assert.equal(
-        this.element
-          .querySelector(".customer-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        CUSTOMER.name
-      );
-      assert.equal(
-        this.element
-          .querySelector(".project-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        PROJECT.name
-      );
-      assert.equal(
-        this.element
-          .querySelector(".task-select .ember-power-select-selected-item")
-          .innerHTML.trim(),
-        TASK.name
-      );
-    });
+    assert.strictEqual(
+      this.element
+        .querySelector(".customer-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      CUSTOMER.name
+    );
+    assert.strictEqual(
+      this.element
+        .querySelector(".project-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      PROJECT.name
+    );
+    assert.strictEqual(
+      this.element
+        .querySelector(".task-select .ember-power-select-selected-item")
+        .innerHTML.trim(),
+      TASK.name
+    );
   });
 
   test("can clear customer", async function (assert) {
@@ -162,15 +155,15 @@ module("Integration | Component | task selection", function (hooks) {
     this.set("task", TASK);
 
     await render(hbs`
-      {{#task-selection
-        initial = (hash
+      <TaskSelection
+        @initial={{(hash
           task  = task
-        )
-      as |t|}}
+        )}}
+      as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-      {{/task-selection}}
+      </TaskSelection>
     `);
   });
 
@@ -178,30 +171,26 @@ module("Integration | Component | task selection", function (hooks) {
     this.set("task", TASK);
 
     await render(hbs`
-      {{#task-selection
-        initial = (hash
+      <TaskSelection
+        @initial={{(hash
           task  = task
-        )
-      as |t|}}
+        )}}
+      as |t|>
         {{t.customer}}
         {{t.project}}
         {{t.task}}
-        <button {{action t.clear}}></button>
-      {{/task-selection}}
+        <button {{on "click" t.clear}}></button>
+      </TaskSelection>
     `);
 
     await click("button");
 
-    return wait().then(() => {
-      assert
-        .dom(".customer-select .ember-power-select-selected-item")
-        .doesNotExist();
-      assert
-        .dom(".project-select .ember-power-select-selected-item")
-        .doesNotExist();
-      assert
-        .dom(".task-select .ember-power-select-selected-item")
-        .doesNotExist();
-    });
+    assert
+      .dom(".customer-select .ember-power-select-selected-item")
+      .doesNotExist();
+    assert
+      .dom(".project-select .ember-power-select-selected-item")
+      .doesNotExist();
+    assert.dom(".task-select .ember-power-select-selected-item").doesNotExist();
   });
 });
