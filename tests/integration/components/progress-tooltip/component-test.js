@@ -1,7 +1,6 @@
 import EmberObject from "@ember/object";
-import { render } from "@ember/test-helpers";
+import { render, settled } from "@ember/test-helpers";
 import { setupRenderingTest } from "ember-qunit";
-import wait from "ember-test-helpers/wait";
 import hbs from "htmlbars-inline-precompile";
 import moment from "moment";
 import { module, skip, test } from "qunit";
@@ -34,24 +33,22 @@ module("Integration | Component | progress tooltip", function (hooks) {
 
     await render(hbs`
       <span id='target'></span>
-      {{progress-tooltip target='#target' model=model visible=true}}
+      <ProgressTooltip @target='#target' @model={{this.model}} @visible={{true}} />
     `);
 
-    return wait().then(() => {
-      assert.dom(".progress-tooltip").exists();
+    assert.dom(".progress-tooltip").exists();
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(1)")
-        .hasText(/^Spent \(Total\): \d+h \d+m$/);
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(1)")
+      .hasText(/^Spent \(Total\): \d+h \d+m$/);
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(2)")
-        .hasText(/^Spent \(Billable\): \d+h \d+m$/);
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(2)")
+      .hasText(/^Spent \(Billable\): \d+h \d+m$/);
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(3)")
-        .hasText("Budget: 50h 0m");
-    });
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(3)")
+      .hasText("Budget: 50h 0m");
   });
 
   test("renders with tasks", async function (assert) {
@@ -68,24 +65,22 @@ module("Integration | Component | progress tooltip", function (hooks) {
 
     await render(hbs`
       <span id='target'></span>
-      {{progress-tooltip target='#target' model=model visible=true}}
+      <ProgressTooltip @target='#target' @model={{this.model}} @visible={{true}} />
     `);
 
-    return wait().then(() => {
-      assert.dom(".progress-tooltip").exists();
+    assert.dom(".progress-tooltip").exists();
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(1)")
-        .hasText(/^Spent \(Total\): \d+h \d+m$/);
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(1)")
+      .hasText(/^Spent \(Total\): \d+h \d+m$/);
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(2)")
-        .hasText(/^Spent \(Billable\): \d+h \d+m$/);
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(2)")
+      .hasText(/^Spent \(Billable\): \d+h \d+m$/);
 
-      assert
-        .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(3)")
-        .hasText("Budget: 100h 30m");
-    });
+    assert
+      .dom(".progress-tooltip .time-info .time-info-durations p:nth-child(3)")
+      .hasText("Budget: 100h 30m");
   });
 
   test("toggles correctly", async function (assert) {
@@ -104,16 +99,15 @@ module("Integration | Component | progress tooltip", function (hooks) {
 
     await render(hbs`
       <span id='target'></span>
-      {{progress-tooltip target='#target' model=model visible=visible}}
+      <ProgressTooltip @target='#target' @model={{this.model}} @visible={{this.visible}} />
     `);
 
     assert.dom(".progress-tooltip").doesNotExist();
 
     this.set("visible", true);
+    await settled();
 
-    return wait().then(() => {
-      assert.dom(".progress-tooltip").exists();
-    });
+    assert.dom(".progress-tooltip").exists();
   });
 
   // TODO enable this
@@ -140,13 +134,11 @@ module("Integration | Component | progress tooltip", function (hooks) {
 
     await render(hbs`
       <span id='target'></span>
-      {{progress-tooltip target='#target' model=model visible=true}}
+      <ProgressTooltip @target='#target' @model={{this.model}} @visible={{true}} />
     `);
 
-    return wait().then(() => {
-      assert.dom(".progress-tooltip .badge--danger").exists();
-      assert.dom(".progress-tooltip .progress-bar.danger").exists();
-    });
+    assert.dom(".progress-tooltip .badge--danger").exists();
+    assert.dom(".progress-tooltip .progress-bar.danger").exists();
   });
 
   // TODO enable this
@@ -173,12 +165,10 @@ module("Integration | Component | progress tooltip", function (hooks) {
 
     await render(hbs`
       <span id='target'></span>
-      {{progress-tooltip target='#target' model=model visible=true}}
+      <ProgressTooltip @target='#target' @model={{this.model}} @visible={{true}} />
     `);
 
-    return wait().then(() => {
-      assert.dom(".progress-tooltip .badge--warning").exists();
-      assert.dom(".progress-tooltip .progress-bar.warning").exists();
-    });
+    assert.dom(".progress-tooltip .badge--warning").exists();
+    assert.dom(".progress-tooltip .progress-bar.warning").exists();
   });
 });
