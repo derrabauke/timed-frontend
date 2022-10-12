@@ -46,6 +46,7 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "2.0.4",
     "@ember/test-helpers": "2.8.1",
+    "@fontsource/source-sans-pro": "^4.5.11",
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
     "@html-next/vertical-collection": "3.0.0-0",
@@ -125,7 +126,6 @@
     "qunit": "^2.19.1",
     "qunit-dom": "^1.6.0",
     "sass": "^1.55.0",
-    "typeface-source-sans-pro": "^0.0.75",
     "webpack": "5"
   },
   "engines": {
