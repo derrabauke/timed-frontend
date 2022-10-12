@@ -1,48 +1,50 @@
 <h1>Users</h1>
 
-{{#filter-sidebar on-reset=(perform resetFilter) as |fs|}}
-  {{#fs.group label='General' expanded=true}}
-    {{#fs.label}}
+<FilterSidebar @on-reset={{perform this.resetFilter}} as |FS|>
+<FS.Group @label='General' @expanded={{true}} >
+  <FS.Label>
       Search
-      {{fs.filter 'search'
+      <FS.Filter 
+        @model='search'
+        @selected={{this.search}}
+        @on-change={{perform this.setSearchFilter}}
         data-test-filter-search
-        selected = search
-        on-change = (perform setSearchFilter)
-      }}
-    {{/fs.label}}
-    {{#if currentUser.isSuperuser}}
-      {{#fs.label}}
+      />
+  </FS.Label>
+    {{#if this.currentUser.isSuperuser}}
+      <FS.Label>
         Supervisor
-        {{#fs.filter data-test-filter-user}}
-          {{#user-selection
-            user          = selectedSupervisor
-            on-change     = (perform setModelFilter 'supervisor')
-            queryOptions  = (hash is_supervisor=1 active=1)
-          as |u|}}
-            {{u.user placeholder='Select supervisor...'}}
-          {{/user-selection}}
-        {{/fs.filter}}
-      {{/fs.label}}
+        <FS.Filter data-test-filter-user>
+          <UserSelection
+            @user={{this.selectedSupervisor}}
+            @onChange={{perform this.setModelFilter "supervisor"}}
+            @queryOptions={{hash is_supervisor=1 active=1}}
+            as |U|>
+            <U.User @placeholder="Select supervisor..." />
+          </UserSelection>
+        </FS.Filter>
+      </FS.Label>
     {{/if}}
-    {{#fs.label}}
+    <FS.Label>
       Active
-      {{fs.filter 'button'
+      <FS.Filter
         data-test-filter-active
-        selected  = active
-        valuePath = 'value'
-        labelPath = 'label'
-        options   = (array
+        @model='button'
+        @selected={{this.active}}
+        @valuePath='value'
+        @labelPath='label'
+        @options={{array
           (hash value='' label='All')
           (hash value='1' label='Active')
           (hash value='0' label='Inactive')
-        )
-        on-change = (action (mut active))
-      }}
-    {{/fs.label}}
-  {{/fs.group}}
-{{/filter-sidebar}}
+        }}
+        @on-change={{fn (mut this.active)}}
+      />
+    </FS.Label>
+  </FS.Group>
+</FilterSidebar>
 
-{{#async-list data as |section data|}}
+<AsyncList @data={{this.data}} as |section data|>
   {{#if (eq section 'empty')}}
     <div class="empty">
       <div>
@@ -67,8 +69,10 @@
         bufferSize        = 10
         containerSelector = '.page-content--scroll'
       as |user|}}
-        {{#link-to 'users.edit' user.id tagName='tr' class='pointer'}}
-          <td class={{unless user.isActive 'color-danger'}}>{{user.fullName}}</td>
+        <tr>
+          <td class={{unless user.isActive 'color-danger'}}>
+            <LinkTo @route='users.edit' @model={{user.id}}>{{user.fullName}}</LinkTo>
+          </td>
           {{#if user.activeEmployment}}
             <td>{{user.activeEmployment.percentage}}%</td>
             <td>{{format-duration user.activeEmployment.worktimePerDay false}}</td>
@@ -80,8 +84,8 @@
               {{format-duration user.currentWorktimeBalance.balance false}}
             </span>
           </td>
-        {{/link-to}}
+        </tr>
       {{/vertical-collection}}
     </table>
   {{/if}}
-{{/async-list}}
+</AsyncList>

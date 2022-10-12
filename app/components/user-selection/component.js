@@ -1,6 +1,7 @@
-import Component from "@ember/component";
-import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import Component from "@glimmer/component";
+import { restartableTask } from "ember-concurrency";
+import { trackedTask } from "ember-resources/util/ember-concurrency";
 import hbs from "htmlbars-inline-precompile";
 
 const SELECTED_TEMPLATE = hbs`{{selected.longName}}`;
@@ -14,39 +15,28 @@ const OPTION_TEMPLATE = hbs`
   </div>
 `;
 
-export default Component.extend({
-  tracking: service("tracking"),
-  store: service("store"),
+export default class UserSelection extends Component {
+  @service tracking;
+  @service store;
 
-  tagName: "",
+  selectedTemplate = SELECTED_TEMPLATE;
 
-  selectedTemplate: SELECTED_TEMPLATE,
+  optionTemplate = OPTION_TEMPLATE;
 
-  optionTemplate: OPTION_TEMPLATE,
+  queryOptions = null;
 
-  queryOptions: null,
+  users = trackedTask(this, this.fetchUsers, () => [this.queryOptions]);
 
-  async init(...args) {
-    this._super(...args);
+  get queryOptions() {
+    return this.args.queryOptions ?? null;
+  }
 
-    try {
-      await this.get("tracking.users").perform();
-    } catch (e) {
-      /* istanbul ignore next */
-      if (e.taskInstance && e.taskInstance.isCanceling) {
-        return;
-      }
-
-      /* istanbul ignore next */
-      throw e;
-    }
-  },
-
-  users: computed("queryOptions", async function () {
-    await this.get("tracking.users.last");
-    const queryOptions = this.get("queryOptions") || {};
+  @restartableTask
+  *fetchUsers() {
+    yield this.tracking.users.perform();
+    const queryOptions = this.queryOptions || {};
 
     queryOptions.ordering = "username";
-    return this.get("store").query("user", queryOptions);
-  }),
-});
+    return yield this.store.query("user", queryOptions);
+  }
+}

@@ -1,18 +1,18 @@
 {{yield (hash
   user                 = (component 'optimized-power-select'
-    options            = users
+    options            = this.users
     disabled           = @disabled
-    selected           = user
+    selected           = @user
     placeholder        = 'Select user...'
     searchField        = 'longName'
     tagName            = 'div'
     class              = 'user-select'
     allowClear         = true
-    onChange           = (action on-change)
+    onChange           = @onChange
     extra              = (hash
       lazy             = true
-      selectedTemplate = selectedTemplate
-      optionTemplate   = optionTemplate
+      selectedTemplate = this.selectedTemplate
+      optionTemplate   = this.optionTemplate
     )
   )
 )}}
