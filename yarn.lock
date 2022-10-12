@@ -792,6 +792,13 @@
   dependencies:
     "@babel/types" "^7.18.6"
 
+"@babel/helper-simple-access@^7.19.4":
+  version "7.19.4"
+  resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.19.4.tgz#be553f4951ac6352df2567f7daa19a0ee15668e7"
+  integrity sha512-f9Xq6WqBFqaDfbCzn2w85hwklswz5qsKlh7f08w4Y9yhJHpnNC0QemtSkK5YyOY8kPGvyiwdzZksGUhnGdaUIg==
+  dependencies:
+    "@babel/types" "^7.19.4"
+
 "@babel/helper-simple-access@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.7.4.tgz#a169a0adb1b5f418cfc19f22586b2ebf58a9a294"
@@ -1221,14 +1228,14 @@
     "@babel/helper-plugin-utils" "^7.18.6"
     "@babel/plugin-syntax-numeric-separator" "^7.10.4"
 
-"@babel/plugin-proposal-object-rest-spread@7.18.9":
-  version "7.18.9"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.18.9.tgz#f9434f6beb2c8cae9dfcf97d2a5941bbbf9ad4e7"
-  integrity sha512-kDDHQ5rflIeY5xl69CEqGEZ0KY369ehsCIEbTGb4siHG5BE9sga/T0r0OUwyZNLMmZE79E1kbsqAjwFCW4ds6Q==
+"@babel/plugin-proposal-object-rest-spread@7.19.4", "@babel/plugin-proposal-object-rest-spread@^7.19.4":
+  version "7.19.4"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.19.4.tgz#a8fc86e8180ff57290c91a75d83fe658189b642d"
+  integrity sha512-wHmj6LDxVDnL+3WhXteUBaoM1aVILZODAUjg11kHqG4cOlfgMQGxw6aCgvrXrmaJR3Bn14oZhImyCPZzRpC93Q==
   dependencies:
-    "@babel/compat-data" "^7.18.8"
-    "@babel/helper-compilation-targets" "^7.18.9"
-    "@babel/helper-plugin-utils" "^7.18.9"
+    "@babel/compat-data" "^7.19.4"
+    "@babel/helper-compilation-targets" "^7.19.3"
+    "@babel/helper-plugin-utils" "^7.19.0"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.3"
     "@babel/plugin-transform-parameters" "^7.18.8"
 
@@ -1242,17 +1249,6 @@
     "@babel/helper-plugin-utils" "^7.16.7"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.3"
     "@babel/plugin-transform-parameters" "^7.16.7"
-
-"@babel/plugin-proposal-object-rest-spread@^7.19.4":
-  version "7.19.4"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.19.4.tgz#a8fc86e8180ff57290c91a75d83fe658189b642d"
-  integrity sha512-wHmj6LDxVDnL+3WhXteUBaoM1aVILZODAUjg11kHqG4cOlfgMQGxw6aCgvrXrmaJR3Bn14oZhImyCPZzRpC93Q==
-  dependencies:
-    "@babel/compat-data" "^7.19.4"
-    "@babel/helper-compilation-targets" "^7.19.3"
-    "@babel/helper-plugin-utils" "^7.19.0"
-    "@babel/plugin-syntax-object-rest-spread" "^7.8.3"
-    "@babel/plugin-transform-parameters" "^7.18.8"
 
 "@babel/plugin-proposal-object-rest-spread@^7.7.4":
   version "7.7.4"
@@ -9775,10 +9771,10 @@ ember-cached-decorator-polyfill@^0.1.4:
     ember-cli-babel "^7.21.0"
     ember-cli-babel-plugin-helpers "^1.1.1"
 
-ember-can@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/ember-can/-/ember-can-4.1.0.tgz#af3bb7838eab381e56977772dbb75bf5e16e77a9"
-  integrity sha512-8s0bR+rmwQ/A4kj6E7AaIAlsPs/oenQVOVgfiUTdbZO2ek57PFWMoSg6mWxDKbozoW2fSEgdhcBv/eaSflh9lQ==
+ember-can@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/ember-can/-/ember-can-4.2.0.tgz#08bfec3b2b57aad3dc6e4dc36fe9692bd1794dab"
+  integrity sha512-hiaWZspmI4zWeWmmFWgyw1+yEStSo6edGRHHUXCUPR+vBoqlT/hEfmndlfDGso2GFP8IV59DORMVY0KReMcO+w==
   dependencies:
     ember-cli-babel "^7.26.6"
     ember-cli-htmlbars "^6.0.0"
@@ -9906,10 +9902,10 @@ ember-cli-code-coverage@^1.0.0-beta.8:
     node-dir "^0.1.17"
     walk-sync "^2.1.0"
 
-ember-cli-dependency-checker@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.2.0.tgz#9202ad9e14d6fda33cffc22a11c343c2a8885330"
-  integrity sha512-dkSmcJ/jY/2ms/S6ph2jXSfOW5VfOpLfg5DFEbra0SaMNgYkNDFF1o0U4OdTsG37L5h/AXWNuVtnOa4TMabz9Q==
+ember-cli-dependency-checker@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.3.1.tgz#16b44d7a1a1e946f59859fad97f32e616d78323a"
+  integrity sha512-Tg6OeijjXNKWkDm6057Tr0N9j9Vlz/ITewXWpn1A/+Wbt3EowBx5ZKfvoupqz05EznKgL1B/ecG0t+JN7Qm6MA==
   dependencies:
     chalk "^2.3.0"
     find-yarn-workspace-root "^1.1.0"
@@ -10127,10 +10123,10 @@ ember-cli-lodash-subset@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
 
-ember-cli-mirage@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-2.3.0.tgz#02f08d5b5ca406607ca1b60ee2cd798488a14be1"
-  integrity sha512-Fj0EVFMIrL4J07f9lEwuX/qjV+m/5D0QUEngmvn7YHIUtfVJtqWkrNaOddhas6waBJMwAz0fvf+/CPbLGGzt5A==
+ember-cli-mirage@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-2.4.0.tgz#7414573c3f9c5d40cefa44835858103691af95f6"
+  integrity sha512-cy8B+IZV07V6xgnFzktKUsntTQvIqPSS3u4+XaLdNW91yOowLsN2BsuQldN3eCnwswgE3a9eGNGS4I0BD4llNA==
   dependencies:
     "@embroider/macros" "^0.41.0"
     broccoli-file-creator "^2.1.1"
