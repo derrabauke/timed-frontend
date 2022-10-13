@@ -16,7 +16,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
   test("renders", async function (assert) {
     this.set("value", moment());
 
-    await render(hbs`{{sy-timepicker value=value}}`);
+    await render(hbs`<SyTimepicker @value={{this.value}} />`);
 
     assert.dom("input").hasValue(moment().format("HH:mm"));
   });
@@ -31,7 +31,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "13:15");
@@ -51,7 +51,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "24:15");
@@ -65,7 +65,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     this.set("value", null);
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "xx:xx");
@@ -89,7 +89,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -114,7 +114,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -139,7 +139,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -165,7 +165,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -191,7 +191,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -217,7 +217,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -243,7 +243,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -284,7 +284,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker min=min max=max value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @min={{this.min}} @max={{this.max}} @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -320,7 +320,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-timepicker precision=5 value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @precision={{5}} @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -339,7 +339,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     this.set("value", moment({ h: 12, m: 30 }));
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "");
@@ -352,7 +352,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     this.set("value", null);
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -371,7 +371,7 @@ module("Integration | Component | sy timepicker", function (hooks) {
     this.set("value", null);
 
     await render(
-      hbs`{{sy-timepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyTimepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
