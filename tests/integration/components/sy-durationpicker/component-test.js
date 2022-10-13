@@ -17,7 +17,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
   test("renders", async function (assert) {
     this.set("value", moment.duration({ h: 1, m: 30 }));
 
-    await render(hbs`{{sy-durationpicker value=value}}`);
+    await render(hbs`<SyDurationpicker @value={{this.value}} />`);
 
     assert.dom("input").hasValue("01:30");
   });
@@ -25,7 +25,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
   test("renders without value", async function (assert) {
     this.set("value", null);
 
-    await render(hbs`{{sy-durationpicker value=value}}`);
+    await render(hbs`<SyDurationpicker @value={{this.value}} />`);
 
     assert.dom("input").hasNoValue();
   });
@@ -40,7 +40,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "13:15");
@@ -60,7 +60,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "-13:00");
@@ -79,7 +79,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "abcdef");
@@ -99,7 +99,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -124,7 +124,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -165,7 +165,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     );
 
     await render(
-      hbs`{{sy-durationpicker min=min max=max value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @min={{this.min}} @max={{this.max}} @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     this.element
@@ -195,7 +195,7 @@ module("Integration | Component | sy durationpicker", function (hooks) {
     this.set("value", null);
 
     await render(
-      hbs`{{sy-durationpicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDurationpicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await fillIn("input", "-04:30");

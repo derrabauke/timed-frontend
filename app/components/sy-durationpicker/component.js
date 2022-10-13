@@ -10,7 +10,6 @@ import SyTimepickerComponent from "timed/components/sy-timepicker/component";
 import formatDuration from "timed/utils/format-duration";
 
 const { MIN_SAFE_INTEGER, MAX_SAFE_INTEGER } = Number;
-
 const { abs } = Math;
 
 /**
@@ -21,17 +20,7 @@ const { abs } = Math;
  * @public
  */
 export default class SyDurationpicker extends SyTimepickerComponent {
-  name = "duration";
-
-  min = MIN_SAFE_INTEGER;
-
-  max = MAX_SAFE_INTEGER;
-
   maxlength = null;
-
-  sanitize(value) {
-    return value.replace(/[^\d:-]/, "");
-  }
 
   /**
    * The precision of the time
@@ -42,6 +31,14 @@ export default class SyDurationpicker extends SyTimepickerComponent {
    * @public
    */
   precision = 15;
+
+  get min() {
+    return this.args.min ?? MIN_SAFE_INTEGER;
+  }
+
+  get max() {
+    return this.args.max ?? MAX_SAFE_INTEGER;
+  }
 
   /**
    * The regex for the input
@@ -56,18 +53,6 @@ export default class SyDurationpicker extends SyTimepickerComponent {
     return `${this.min < 0 ? "-?" : ""}\\d+:(${minutes
       .map((m) => padStart(m, 2))
       .join("|")})`;
-  }
-
-  change({ target: { validity, value } }) {
-    if (validity.valid) {
-      const negative = /^-/.test(value);
-
-      const [h = NaN, m = NaN] = this.sanitize(value)
-        .split(":")
-        .map((n) => abs(parseInt(n)) * (negative ? -1 : 1));
-
-      this._change([h, m].some(isNaN) ? null : this._set(h, m));
-    }
   }
 
   /**
@@ -108,6 +93,23 @@ export default class SyDurationpicker extends SyTimepickerComponent {
    */
   _add(h, m) {
     return moment.duration(this.args.value).add({ h, m });
+  }
+
+  _isValid(duration) {
+    return duration < this.max && duration > this.min;
+  }
+
+  @action
+  change({ target: { validity, value } }) {
+    if (validity.valid) {
+      const negative = /^-/.test(value);
+
+      const [h = NaN, m = NaN] = this.sanitize(value)
+        .split(":")
+        .map((n) => abs(parseInt(n)) * (negative ? -1 : 1));
+
+      this._change([h, m].some(isNaN) ? null : this._set(h, m));
+    }
   }
 
   @action
