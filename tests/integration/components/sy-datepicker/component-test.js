@@ -12,7 +12,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     assert.dom("input").hasValue(moment().format("DD.MM.YYYY"));
@@ -22,7 +22,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     assert.dom(".sy-datepicker").doesNotExist();
@@ -36,7 +36,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", null);
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     assert.ok(find("input").validity.valid);
@@ -56,7 +56,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     find("input").value = "1.2.2018";
@@ -80,7 +80,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await clickTrigger();
@@ -97,7 +97,7 @@ module("Integration | Component | sy datepicker", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepicker @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     assert.dom(".sy-datepicker").doesNotExist();

@@ -12,7 +12,7 @@ module("Integration | Component | sy datepicker btn", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker-btn value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepickerBtn @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     assert.dom(".sy-datepicker").doesNotExist();
@@ -26,7 +26,7 @@ module("Integration | Component | sy datepicker btn", function (hooks) {
     this.set("value", moment());
 
     await render(
-      hbs`{{sy-datepicker-btn value=value on-change=(action (mut value))}}`
+      hbs`<SyDatepickerBtn @value={{this.value}} @onChange={{fn (mut this.value)}} />`
     );
 
     await clickTrigger();
