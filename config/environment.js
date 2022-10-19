@@ -57,21 +57,6 @@ module.exports = function (environment) {
       userinfoEndpoint: "/userinfo",
       afterLogoutUri: "/",
     },
-
-    "ember-validated-form": {
-      css: {
-        // adcssy classes
-        group: "form-group",
-        control: "form-control",
-        label: "form-label",
-        checkbox: "checkbox",
-        radio: "radio",
-        help: "error-text",
-        button: "btn btn-default",
-        submit: "btn btn-primary",
-        loading: "loading",
-      },
-    },
   };
 
   if (environment === "development") {
