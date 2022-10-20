@@ -13,48 +13,45 @@ module("Integration | Component | date navigation", function (hooks) {
     this.set("date", DATE);
 
     await render(
-      hbs`{{date-navigation current=date on-change=(action (mut date))}}`
+      hbs`<DateNavigation @current={{this.date}} @onChange={{fn (mut this.date)}} />`
     );
 
-    assert.equal(this.get("date").format("YYYY-MM-DD"), "2017-01-10");
+    assert.equal(this.date.format("YYYY-MM-DD"), "2017-01-10");
   });
 
   test("can select the next day", async function (assert) {
     this.set("date", DATE);
 
     await render(
-      hbs`{{date-navigation current=date on-change=(action (mut date))}}`
+      hbs`<DateNavigation @current={{this.date}} @onChange={{fn (mut this.date)}} />`
     );
 
     await click("[data-test-next]");
 
-    assert.equal(this.get("date").format("YYYY-MM-DD"), "2017-01-11");
+    assert.equal(this.date.format("YYYY-MM-DD"), "2017-01-11");
   });
 
   test("can select the previous day", async function (assert) {
     this.set("date", DATE);
 
     await render(
-      hbs`{{date-navigation current=date on-change=(action (mut date))}}`
+      hbs`<DateNavigation @current={{this.date}} @onChange={{fn (mut this.date)}} />`
     );
 
     await click("[data-test-previous]");
 
-    assert.equal(this.get("date").format("YYYY-MM-DD"), "2017-01-09");
+    assert.equal(this.date.format("YYYY-MM-DD"), "2017-01-09");
   });
 
   test("can select the current day", async function (assert) {
     this.set("date", DATE);
 
     await render(
-      hbs`{{date-navigation current=date on-change=(action (mut date))}}`
+      hbs`<DateNavigation @current={{this.date}} @onChange={{fn (mut this.date)}} />`
     );
 
     await click("[data-test-today]");
 
-    assert.equal(
-      this.get("date").format("YYYY-MM-DD"),
-      moment().format("YYYY-MM-DD")
-    );
+    assert.equal(this.date.format("YYYY-MM-DD"), moment().format("YYYY-MM-DD"));
   });
 });
