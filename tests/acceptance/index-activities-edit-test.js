@@ -78,8 +78,6 @@ module("Acceptance | index activities edit", function (hooks) {
 
     await visit(`/edit/${id}`);
 
-    await click("[data-test-activity-edit-form-delete]");
-
     assert.dom("[data-test-activity-edit-form-delete]").isDisabled();
     assert.dom(`[data-test-activity-row-id="${id}"]`).exists();
   });

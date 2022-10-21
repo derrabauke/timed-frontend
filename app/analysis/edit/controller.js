@@ -195,7 +195,7 @@ export default Controller.extend(AnalysisEditQueryParams.Mixin, {
       }
 
       this.router
-        .transitionToRoute("analysis.index", {
+        .transitionTo("analysis.index", {
           queryParams: {
             ...this.get("allQueryParams"),
           },

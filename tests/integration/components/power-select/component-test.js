@@ -4,7 +4,6 @@ import {
   clickTrigger,
 } from "ember-power-select/test-support/helpers";
 import { setupRenderingTest } from "ember-qunit";
-import wait from "ember-test-helpers/wait";
 import hbs from "htmlbars-inline-precompile";
 import { module, test } from "qunit";
 
@@ -25,30 +24,26 @@ module("Integration | Component | power select", function (hooks) {
     this.set("optionTemplate", hbs`Option: {{option.name}}`);
 
     await render(hbs`
-      {{power-select
-        options            = options
-        selected           = selected
-        onchange           = (action (mut selected))
-        tagName            = 'div'
-        class              = 'select'
-        renderInPlace      = true
-        extra              = (hash
-          optionTemplate   = optionTemplate
-          selectedTemplate = selectedTemplate
-        )
-      }}
+      <PowerSelect
+        class              = 'my-select'
+        @options           = {{this.options}}
+        @selected          = {{this.selected}}
+        @onChange          = {{(fn (mut selected))}}
+        @tagName           = 'div'
+        @renderInPlace     = {{true}}
+        @extra             = {{(hash
+          optionTemplate   = this.optionTemplate
+          selectedTemplate = this.selectedTemplate
+        )}}
+      />
     `);
 
-    await clickTrigger(".select");
+    await clickTrigger(".my-select");
 
-    return wait().then(() => {
-      assert
-        .dom(".ember-power-select-selected-item")
-        .hasText("Selected: Test 1");
-      assert
-        .dom(".ember-power-select-option:first-of-type")
-        .hasText("Option: Test 1");
-    });
+    assert.dom(".ember-power-select-selected-item").hasText("Selected: Test 1");
+    assert
+      .dom(".ember-power-select-option:first-of-type")
+      .hasText("Option: Test 1");
   });
 
   test("can select with tab", async function (assert) {
@@ -81,8 +76,6 @@ module("Integration | Component | power select", function (hooks) {
 
     await triggerKeyEvent(".ember-power-select-search-input", "keydown", 9);
 
-    return wait().then(() => {
-      assert.equal(this.get("selected.id"), 2);
-    });
+    assert.equal(this.get("selected.id"), 2);
   });
 });

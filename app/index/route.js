@@ -39,14 +39,6 @@ export default Route.extend(RouteAutostartTourMixin, {
   session: service(),
 
   /**
-   * The notify service
-   *
-   * @property {EmberNotify.NotifyService} notify
-   * @public
-   */
-  notify: service("notify"),
-
-  /**
    * Model hook, return the selected day as moment object
    *
    * @method model
@@ -122,80 +114,4 @@ export default Route.extend(RouteAutostartTourMixin, {
     });
   },
 
-  actions: {
-    /**
-     * Edit an existing absence
-     *
-     * @method editAbsence
-     * @param {EmberChangeset.Changeset} changeset The changeset containing the absence data
-     * @public
-     */
-    async saveAbsence(changeset) {
-      try {
-        this.send("loading");
-
-        await changeset.save();
-
-        this.set("controller.showEditModal", false);
-      } catch (e) {
-        /* istanbul ignore next */
-        this.get("notify").error("Error while saving the absence");
-      } finally {
-        this.send("finished");
-      }
-    },
-
-    /**
-     * Delete an absence
-     *
-     * @method deleteAbsence
-     * @param {Absence} absence The absence to delete
-     * @public
-     */
-    async deleteAbsence(absence) {
-      try {
-        this.send("loading");
-
-        await absence.destroyRecord();
-      } catch (e) {
-        /* istanbul ignore next */
-        this.get("notify").error("Error while deleting the absence");
-      } finally {
-        this.send("finished");
-      }
-    },
-
-    /**
-     * Add one or more absences
-     *
-     * @method addAbsence
-     * @param {EmberChangeset.Changeset} changeset The changeset containing the absence data
-     * @public
-     */
-    async addAbsence(changeset) {
-      try {
-        const absenceType = changeset.get("absenceType");
-        const comment = changeset.get("comment");
-
-        changeset.get("dates").forEach(async (date) => {
-          const absence = this.store.createRecord("absence", {
-            absenceType,
-            date,
-            comment,
-          });
-
-          await absence.save();
-        });
-
-        changeset.rollback();
-
-        this.set("controller.showAddModal", false);
-      } catch (e) {
-        /* istanbul ignore next */
-        this.get("notify").error("Error while adding the absence");
-      } finally {
-        this.send("finished");
-      }
-    },
-  },
 });

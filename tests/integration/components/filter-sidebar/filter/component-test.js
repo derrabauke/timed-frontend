@@ -81,13 +81,14 @@ module("Integration | Component | filter sidebar/filter", function (hooks) {
     this.set("selected", moment({ year: 2017, month: 10, day: 1 }));
 
     await render(hbs`
-      {{filter-sidebar/filter 'date'
-        selected=selected
-        on-change=(action (mut selected))
-      }}
+      <FilterSidebar::Filter
+        @type='date'
+        @selected={{this.selected}}
+        @onChange={{fn (mut this.selected)}}
+      />
     `);
 
-    assert.dom("input").hasValue(this.get("selected").format("DD.MM.YYYY"));
+    assert.dom("input").hasValue(this.selected.format("DD.MM.YYYY"));
 
     await fillIn("input", "10.10.2010");
 
